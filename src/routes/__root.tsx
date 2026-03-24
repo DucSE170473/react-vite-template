@@ -1,6 +1,8 @@
+import { useEffect } from 'react'
 import {
   createRootRoute,
   Outlet,
+  useLocation,
 } from '@tanstack/react-router'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
@@ -25,9 +27,18 @@ export const Route = createRootRoute({
   component: RootLayout,
 })
 
+function ScrollToTop() {
+  const { pathname } = useLocation()
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' })
+  }, [pathname])
+  return null
+}
+
 function RootLayout() {
   return (
     <>
+      <ScrollToTop />
       <Header />
       <Outlet />
       <Footer />

@@ -40,10 +40,10 @@ export default function Footer() {
 
             {/* Social Icons - Tối giản cho đồng bộ */}
             <div className="flex gap-4">
-              <a href="#" className="p-3 rounded-xl bg-slate-800 text-slate-300 hover:text-[var(--brand-accent)] hover:bg-slate-700 transition-all active:scale-95">
+              <a href="#" aria-label="Theo dõi TTB CORP trên Facebook" className="p-3 rounded-xl bg-slate-800 text-slate-300 hover:text-[var(--brand-accent)] hover:bg-slate-700 transition-all active:scale-95">
                 <Facebook size={20} />
               </a>
-              <a href="#" className="p-3 rounded-xl bg-slate-800 text-slate-300 hover:text-red-500 hover:bg-slate-700 transition-all active:scale-95">
+              <a href="#" aria-label="Xem kênh Youtube của TTB CORP" className="p-3 rounded-xl bg-slate-800 text-slate-300 hover:text-red-500 hover:bg-slate-700 transition-all active:scale-95">
                 <Youtube size={20} />
               </a>
             </div>

@@ -1,9 +1,10 @@
-import { Link } from '@tanstack/react-router'
+import { Link, useMatchRoute } from '@tanstack/react-router'
 import { useState, useEffect } from 'react'
-import { Menu, X, Phone, ArrowRight } from 'lucide-react'
+import { Menu, X, Phone } from 'lucide-react'
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false)
+  const matchRoute = useMatchRoute()
 
   // Đóng menu khi đổi trang hoặc xoay màn hình
   useEffect(() => {
@@ -13,10 +14,10 @@ export default function Header() {
   }, [])
 
   const navLinks = [
-    { to: "/", label: "Trang chủ" },
-    { to: "/about", label: "Giới thiệu" },
-    { to: "/projects", label: "Dự án" },
-    { to: "/contact", label: "Liên hệ" },
+    { to: "/", label: "Trang chủ", exact: true },
+    { to: "/about", label: "Giới thiệu", exact: false },
+    { to: "/projects", label: "Dự án", exact: false },
+    { to: "/contact", label: "Liên hệ", exact: false },
   ]
 
   return (
@@ -44,16 +45,21 @@ export default function Header() {
 
         {/* 2. Menu Desktop */}
         <div className="hidden md:flex items-center gap-6 lg:gap-8 text-[11px] lg:text-[12px] font-bold uppercase tracking-[0.15em] text-white/80">
-          {navLinks.map((link) => (
-            <Link
-              key={link.to}
-              to={link.to}
-              className="relative group transition-colors duration-300 hover:text-white [&.active]:text-white"
-            >
-              {link.label}
-              <span className="absolute -bottom-1.5 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
-            </Link>
-          ))}
+          {navLinks.map((link) => {
+            const isActive = !!matchRoute({ to: link.to, fuzzy: !link.exact })
+            return (
+              <Link
+                key={link.to}
+                to={link.to}
+                className={`relative pb-1.5 transition-colors duration-300 border-b-2 ${isActive
+                    ? 'text-white border-[var(--brand-accent)]'
+                    : 'text-white/70 border-transparent hover:text-white hover:border-white/40'
+                  }`}
+              >
+                {link.label}
+              </Link>
+            )
+          })}
         </div>
 
         {/* 3. Nút Hotline & Báo Giá */}
@@ -88,16 +94,20 @@ export default function Header() {
           ${isOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-full'}
         `}>
           <div className="flex flex-col items-center gap-8">
-            {navLinks.map((link) => (
-              <Link
-                key={link.to}
-                to={link.to}
-                onClick={() => setIsOpen(false)}
-                className="text-2xl font-black text-white uppercase tracking-[0.2em] hover:text-[var(--brand-accent)] transition-colors"
-              >
-                {link.label}
-              </Link>
-            ))}
+            {navLinks.map((link) => {
+              const isActive = !!matchRoute({ to: link.to, fuzzy: !link.exact })
+              return (
+                <Link
+                  key={link.to}
+                  to={link.to}
+                  onClick={() => setIsOpen(false)}
+                  className={`text-2xl font-black uppercase tracking-[0.2em] transition-colors ${isActive ? 'text-[var(--brand-accent)]' : 'text-white/70 hover:text-white'
+                    }`}
+                >
+                  {link.label}
+                </Link>
+              )
+            })}
 
             <a
               href="tel:0792515151"

@@ -1,4 +1,4 @@
-import { Factory, DraftingCompass, Building2, ShieldCheck, ArrowUpRight } from "lucide-react"
+import { Factory, DraftingCompass, Building2, ShieldCheck, ArrowRight, ArrowUpRight } from "lucide-react"
 import { Link } from "@tanstack/react-router"
 
 const steelServices = [
@@ -73,7 +73,7 @@ export default function Services() {
         </div>
 
         {/* Lưới dịch vụ - 1 cột mobile, 2 cột tablet, 4 cột desktop */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
           {steelServices.map((item, index) => (
             <div
               key={index}
@@ -84,13 +84,13 @@ export default function Services() {
                 <img
                   src={`/${item.bgImg}`}
                   alt={item.title}
-                  className="w-full h-full object-cover transition-all duration-1000 group-hover:scale-110 opacity-[0.15] group-hover:opacity-[0.4] grayscale group-hover:grayscale-0"
+                  className="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-110 opacity-[0.15] group-hover:opacity-[0.4] grayscale group-hover:grayscale-0"
                 />
                 <div className="absolute inset-0 bg-gradient-to-br from-white via-white/60 to-transparent"></div>
               </div>
 
               {/* Icon - Scale nhỏ hơn trên mobile */}
-              <div className={`relative z-10 w-14 h-14 md:w-16 md:h-16 ${item.accent} rounded-2xl flex items-center justify-center mb-6 md:mb-8 shadow-sm group-hover:rotate-[12deg] transition-all duration-[800ms]`}>
+              <div className={`relative z-10 w-14 h-14 md:w-16 md:h-16 ${item.accent} rounded-2xl flex items-center justify-center mb-6 md:mb-8 shadow-sm group-hover:rotate-12 transition-all duration-[800ms]`}>
                 {item.icon}
               </div>
 
@@ -106,10 +106,11 @@ export default function Services() {
                 {/* Link xem chi tiết - Mới thêm cho Stage 3 */}
                 <Link
                   to="/contact"
+                  aria-label={`Xem chi tiết dịch vụ ${item.title}`}
                   className="inline-flex items-center gap-2 text-[var(--brand-primary)] font-black text-xs uppercase tracking-widest hover:text-[var(--brand-accent)] transition-colors group/link"
                 >
                   Xem chi tiết
-                  <ArrowUpRight size={16} className="group-hover/link:translate-x-1 group-hover/link:-translate-y-1 transition-transform" />
+                  <ArrowRight size={14} className="group-hover/link:translate-x-1 transition-transform" />
                 </Link>
               </div>
 

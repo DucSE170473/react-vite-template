@@ -7,23 +7,23 @@ export default function About() {
       <div className="absolute top-0 right-0 w-1/3 h-full bg-[var(--brand-primary)]/5 -skew-x-12 translate-x-1/2 hidden lg:block"></div>
 
       <div className="max-w-7xl mx-auto px-4 md:px-6 grid lg:grid-cols-2 gap-12 md:gap-20 items-center relative">
-        
+
         {/* Khối Hình ảnh (Bên trái) - Tối ưu Layout Mobile */}
         <div className="relative order-2 lg:order-1 px-4 md:px-0">
           {/* Ảnh 1: Nhà máy */}
           <div className="relative z-10 w-full md:w-4/5 aspect-[4/3] md:aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl border-4 md:border-8 border-white">
-            <img 
-              src="/img-factory.jpg" 
-              alt="Nhà máy kết cấu thép TTB" 
+            <img
+              src="/img-factory.jpg"
+              alt="Nhà máy kết cấu thép TTB"
               className="w-full h-full object-cover"
             />
           </div>
 
           {/* Ảnh 2: Công trình - Chỉnh lại vị trí để không bị lấp mất trên mobile */}
           <div className="absolute -bottom-6 -right-2 md:-bottom-10 md:-right-4 z-20 w-1/2 md:w-3/5 aspect-square rounded-2xl overflow-hidden shadow-2xl border-4 md:border-8 border-white">
-            <img 
-              src="/img-project-site.jpg" 
-              alt="Dự án thực tế TTB CORP" 
+            <img
+              src="/img-project-site.jpg"
+              alt="Dự án thực tế TTB CORP"
               className="w-full h-full object-cover"
             />
           </div>
@@ -45,16 +45,16 @@ export default function About() {
                 Hành trình vươn tầm
               </span>
             </div>
-            
+
             <h2 className="text-3xl md:text-6xl font-black text-slate-900 leading-tight tracking-tighter">
-              Uy tín khẳng định qua <br /> 
+              Uy tín khẳng định qua <br />
               <span className="text-[var(--brand-primary)] italic">chất lượng công trình</span>
             </h2>
-            
+
             <p className="text-[var(--brand-primary)] text-lg md:text-xl font-black border-l-4 border-[var(--brand-accent)] pl-4 mx-auto lg:mx-0 w-fit">
               Thành Công TTB CORP
             </p>
-            
+
             <p className="text-slate-600 leading-relaxed text-base md:text-lg">
               Xây dựng khung thép vững chãi và <strong>niềm tin tuyệt đối</strong> cho đối tác thông qua giải pháp tối ưu công năng.
             </p>

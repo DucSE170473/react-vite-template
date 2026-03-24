@@ -13,7 +13,6 @@ export default function AboutHero() {
           className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-700 hover:scale-105"
           style={{
             backgroundImage: `url('${backgroundImage}')`,
-            // filter: 'grayscale(100%)' // Mở comment nếu bạn muốn ảnh trắng đen
           }}
           aria-hidden="true"
         />

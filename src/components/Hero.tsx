@@ -27,19 +27,16 @@ export default function Hero() {
             Chuyên gia kết cấu thép & PCCC
           </div>
 
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[6.5rem] font-black leading-[1] md:leading-[0.85] tracking-tighter uppercase">
-            <span className="block text-base md:text-2xl lg:text-3xl font-light tracking-[0.2em] md:tracking-[0.3em] text-slate-400 mb-2 md:mb-4">
-              Vững nền tảng
-            </span>
-            <span className="relative inline-block text-[var(--brand-primary)]">
+          {/* Tiêu đề chính */}
+          <h1 className="flex flex-col gap-2 md:gap-4 mb-4 md:mb-6">
+            <span className="text-slate-400 font-medium text-sm md:text-xl tracking-[0.3em] md:tracking-[0.5em] uppercase">Vững nền tảng</span>
+            <span className="text-4xl md:text-6xl lg:text-8xl font-black text-[var(--brand-primary)] leading-[1.1] tracking-tighter uppercase relative inline-block">
               Sáng tương lai
-              {/* Gạch chân kỹ thuật - Thu nhỏ trên mobile */}
-              <span className="absolute -bottom-2 md:-bottom-4 left-0 w-full h-2 md:h-3 bg-[var(--brand-primary)]/10 rounded-full"></span>
-              <span className="absolute -bottom-2 md:-bottom-4 left-0 w-1/3 h-2 md:h-3 bg-[var(--brand-accent)] rounded-full"></span>
+              <span className="absolute -bottom-2 left-0 w-24 md:w-48 h-1.5 md:h-2 bg-[var(--brand-accent)] rounded-full"></span>
             </span>
           </h1>
 
-          <p className="text-base md:text-lg text-slate-600 max-w-lg leading-relaxed font-medium border-l-0 lg:border-l-4 border-[var(--brand-primary)]/20 pl-0 lg:pl-6 mx-auto lg:mx-0">
+          <p className="text-sm md:text-lg text-slate-600 max-w-lg leading-relaxed font-medium border-l-0 lg:border-l-4 border-[var(--brand-primary)]/20 pl-0 lg:pl-6 mx-auto lg:mx-0 mt-6 md:mt-0">
             <span className="text-[var(--brand-primary)] font-black italic uppercase tracking-wider">TTB CORP</span>
             <br className="hidden md:block" />
             Hệ sinh thái hạ tầng công nghiệp trọn gói:
@@ -47,14 +44,15 @@ export default function Hero() {
             Tư vấn tối ưu - Thiết kế chính xác - Thi công thần tốc.
           </p>
 
-          {/* Button Group - Xếp chồng trên mobile cực nhỏ */}
+          {/* Button Group - Tăng contrast cho text nút chính */}
           <div className="flex flex-col sm:flex-row flex-wrap justify-center lg:justify-start gap-4 md:gap-5 pt-4">
             <Link
               to="/contact"
+              aria-label="Liên hệ tư vấn với TTB CORP"
               className="bg-[var(--brand-primary)] text-white px-8 md:px-10 py-4 md:py-5 rounded-2xl font-black hover:bg-[var(--brand-primary)]/90 transition-all flex items-center justify-center gap-3 shadow-xl shadow-[var(--brand-primary)]/20 hover:-translate-y-1 active:scale-95 uppercase text-xs md:text-sm tracking-widest"
             >
               Liên hệ tư vấn
-              <Zap size={18} fill="currentColor" />
+              <Zap size={18} fill="white" />
             </Link>
 
             <a

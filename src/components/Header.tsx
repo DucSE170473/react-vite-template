@@ -1,6 +1,7 @@
 import { Link, useMatchRoute } from '@tanstack/react-router'
 import { useState, useEffect } from 'react'
 import { Menu, X, Phone } from 'lucide-react'
+import ThemeToggle from './ThemeToggle'
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false)
@@ -70,6 +71,8 @@ export default function Header() {
           >
             <Phone size={14} /> 0792.51.51.51
           </a>
+
+          <ThemeToggle />
 
           {/* Nút Báo Giá
           <Link to="/contact" className="bg-white text-[var(--brand-primary)] px-4 md:px-6 py-2.5 rounded-xl font-bold hover:bg-[var(--brand-accent)] hover:text-white transition-all flex items-center gap-2 group shadow-lg text-[11px] md:text-sm no-underline">

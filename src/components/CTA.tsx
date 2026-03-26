@@ -14,7 +14,7 @@ export default function CTA() {
           <div className="absolute inset-0 z-0">
             {!imgError ? (
               <img
-                src="/steel-cta-bg.jpg" // Đảm bảo file này ở thư mục public/
+                src="/steel-cta-bg.jpg"
                 alt="TTB Corp Industrial Project"
                 loading="lazy"
                 onError={() => setImgError(true)}
@@ -24,7 +24,7 @@ export default function CTA() {
               // Fallback khi ảnh lỗi: Gradient nghệ thuật theo tone màu thương hiệu
               <div className="w-full h-full bg-gradient-to-br from-[var(--brand-primary)] via-[var(--brand-secondary)] to-[var(--brand-primary-hover)] opacity-50" />
             )}
-            
+
             {/* Lớp phủ Gradient thông minh */}
             <div className="absolute inset-0 bg-gradient-to-b lg:bg-gradient-to-r from-[var(--brand-primary)] via-[var(--brand-primary)]/90 md:via-[var(--brand-primary)]/70 to-transparent"></div>
           </div>

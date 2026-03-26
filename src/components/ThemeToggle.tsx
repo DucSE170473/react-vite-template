@@ -1,81 +1,36 @@
-import { useEffect, useState } from 'react'
-
-type ThemeMode = 'light' | 'dark' | 'auto'
-
-function getInitialMode(): ThemeMode {
-  if (typeof window === 'undefined') {
-    return 'auto'
-  }
-
-  const stored = window.localStorage.getItem('theme')
-  if (stored === 'light' || stored === 'dark' || stored === 'auto') {
-    return stored
-  }
-
-  return 'auto'
-}
-
-function applyThemeMode(mode: ThemeMode) {
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-  const resolved = mode === 'auto' ? (prefersDark ? 'dark' : 'light') : mode
-
-  document.documentElement.classList.remove('light', 'dark')
-  document.documentElement.classList.add(resolved)
-
-  if (mode === 'auto') {
-    document.documentElement.removeAttribute('data-theme')
-  } else {
-    document.documentElement.setAttribute('data-theme', mode)
-  }
-
-  document.documentElement.style.colorScheme = resolved
-}
+import { Sun, Moon } from 'lucide-react'
+import { useState, useEffect } from 'react'
 
 export default function ThemeToggle() {
-  const [mode, setMode] = useState<ThemeMode>('auto')
+  const [isDark, setIsDark] = useState(false)
 
   useEffect(() => {
-    const initialMode = getInitialMode()
-    setMode(initialMode)
-    applyThemeMode(initialMode)
+    // Kiểm tra preference người dùng hoặc trạng thái đã lưu trước
+    const saved = localStorage.getItem('ttb-theme')
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const dark = saved ? saved === 'dark' : prefersDark
+    setIsDark(dark)
+    document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light')
   }, [])
 
-  useEffect(() => {
-    if (mode !== 'auto') {
-      return
-    }
-
-    const media = window.matchMedia('(prefers-color-scheme: dark)')
-    const onChange = () => applyThemeMode('auto')
-
-    media.addEventListener('change', onChange)
-    return () => {
-      media.removeEventListener('change', onChange)
-    }
-  }, [mode])
-
-  function toggleMode() {
-    const nextMode: ThemeMode =
-      mode === 'light' ? 'dark' : mode === 'dark' ? 'auto' : 'light'
-    setMode(nextMode)
-    applyThemeMode(nextMode)
-    window.localStorage.setItem('theme', nextMode)
+  const toggle = () => {
+    const next = !isDark
+    setIsDark(next)
+    localStorage.setItem('ttb-theme', next ? 'dark' : 'light')
+    document.documentElement.setAttribute('data-theme', next ? 'dark' : 'light')
   }
-
-  const label =
-    mode === 'auto'
-      ? 'Theme mode: auto (system). Click to switch to light mode.'
-      : `Theme mode: ${mode}. Click to switch mode.`
 
   return (
     <button
-      type="button"
-      onClick={toggleMode}
-      aria-label={label}
-      title={label}
-      className="rounded-full border border-[var(--chip-line)] bg-[var(--chip-bg)] px-3 py-1.5 text-sm font-semibold text-[var(--sea-ink)] shadow-[0_8px_22px_rgba(30,90,72,0.08)] transition hover:-translate-y-0.5"
+      onClick={toggle}
+      aria-label={isDark ? 'Chuyển sang chế độ sáng' : 'Chuyển sang chế độ tối'}
+      className="p-2 rounded-lg text-white/70 hover:text-white hover:bg-white/10 transition-all duration-300 flex items-center justify-center"
     >
-      {mode === 'auto' ? 'Auto' : mode === 'dark' ? 'Dark' : 'Light'}
+      {isDark ? (
+        <Sun size={18} className="text-yellow-300" />
+      ) : (
+        <Moon size={18} />
+      )}
     </button>
   )
 }

@@ -1,5 +1,6 @@
 import { Factory, DraftingCompass, Building2, ShieldCheck, ArrowRight, ArrowUpRight } from "lucide-react"
 import { Link } from "@tanstack/react-router"
+import { useRevealAll } from "../hooks/useReveal"
 
 const steelServices = [
   {
@@ -33,6 +34,8 @@ const steelServices = [
 ]
 
 export default function Services() {
+  const gridRef = useRevealAll<HTMLDivElement>()
+
   return (
     <section className="py-16 md:py-24 bg-slate-50 relative overflow-hidden">
       {/* Họa tiết trang trí nền */}
@@ -73,7 +76,7 @@ export default function Services() {
         </div>
 
         {/* Lưới dịch vụ - 1 cột mobile, 2 cột tablet, 4 cột desktop */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+        <div ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 reveal-stagger">
           {steelServices.map((item, index) => (
             <div
               key={index}

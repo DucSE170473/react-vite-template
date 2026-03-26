@@ -105,6 +105,86 @@
   --brand-text-muted: #94a3b8;
 }
 
+/* ==========================================================
+   DARK MODE — Global Background & Surface Overrides
+   Thay đổi toàn bộ nền, card, text, và input cho dark mode.
+   ========================================================== */
+:root[data-theme="dark"] body {
+  background-color: #0f172a;
+  background:
+    radial-gradient(1100px 620px at -8% -10%, rgba(37, 99, 235, 0.08), transparent 58%),
+    radial-gradient(1050px 620px at 112% -12%, rgba(96, 165, 250, 0.06), transparent 62%),
+    radial-gradient(720px 380px at 50% 115%, rgba(59, 130, 246, 0.04), transparent 68%),
+    linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+  color: #e2e8f0;
+}
+
+/* Nền section: bg-slate-50 → slate-800/900 */
+:root[data-theme="dark"] .bg-slate-50 {
+  background-color: #1e293b !important;
+}
+:root[data-theme="dark"] .bg-slate-50\/50 {
+  background-color: rgba(30, 41, 59, 0.5) !important;
+}
+
+/* Card & Surface: bg-white → slate-800 */
+:root[data-theme="dark"] .bg-white {
+  background-color: #1e293b !important;
+}
+
+/* Text color overrides */
+:root[data-theme="dark"] .text-slate-900,
+:root[data-theme="dark"] .text-slate-800 {
+  color: #f1f5f9 !important;
+}
+:root[data-theme="dark"] .text-slate-700,
+:root[data-theme="dark"] .text-slate-600 {
+  color: #cbd5e1 !important;
+}
+:root[data-theme="dark"] .text-slate-500,
+:root[data-theme="dark"] .text-slate-400 {
+  color: #94a3b8 !important;
+}
+:root[data-theme="dark"] .text-black {
+  color: #f1f5f9 !important;
+}
+
+/* Border overrides */
+:root[data-theme="dark"] .border-slate-100,
+:root[data-theme="dark"] .border-slate-200 {
+  border-color: rgba(148, 163, 184, 0.15) !important;
+}
+
+/* Input fields: cần nền tối và chữ sáng */
+:root[data-theme="dark"] input,
+:root[data-theme="dark"] textarea {
+  background-color: #0f172a !important;
+  color: #e2e8f0 !important;
+  border-color: rgba(148, 163, 184, 0.2) !important;
+}
+:root[data-theme="dark"] input::placeholder,
+:root[data-theme="dark"] textarea::placeholder {
+  color: #64748b !important;
+}
+:root[data-theme="dark"] input:focus,
+:root[data-theme="dark"] textarea:focus {
+  background-color: #1e293b !important;
+}
+
+/* Shadow: đổi bóng cho phù hợp nền tối */
+:root[data-theme="dark"] .shadow-xl,
+:root[data-theme="dark"] .shadow-2xl {
+  --tw-shadow-color: rgba(0, 0, 0, 0.4);
+}
+:root[data-theme="dark"] .shadow-sm {
+  --tw-shadow-color: rgba(0, 0, 0, 0.3);
+}
+
+/* Footer styling */
+:root[data-theme="dark"] footer {
+  background-color: #0c1524 !important;
+}
+
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --sea-ink: #d7ece8;

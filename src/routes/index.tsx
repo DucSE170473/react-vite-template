@@ -7,6 +7,17 @@ import CTA from '../components/CTA'
 import { CheckCircle2, Star } from "lucide-react"
 
 export const Route = createFileRoute('/')({
+  head: () => ({
+    meta: [
+      {
+        title: "TTB CORP - Giải Pháp Kết Cấu Thép & PCCC Toàn Diện",
+      },
+      {
+        name: "description",
+        content: "TTB CORP cung cấp giải pháp trọn gói: Tư vấn, thiết kế, sản xuất và lắp dựng kết cấu thép chuyên nghiệp. Đối tác tin cậy cho mọi công trình công nghiệp.",
+      },
+    ],
+  }),
   component: HomePage,
 })
 
@@ -67,6 +78,7 @@ function HomePage() {
               <img
                 src="/steel-6.jpg"
                 alt="Quality Construction"
+                loading="lazy"
                 className="w-full h-full object-cover aspect-[4/3] md:aspect-square"
               />
             </div>

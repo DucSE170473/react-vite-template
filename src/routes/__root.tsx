@@ -22,6 +22,26 @@ export const Route = createRootRoute({
         name: 'description',
         content: 'TTB CORP - Đơn vị hàng đầu về giải pháp kết cấu thép, nhà xưởng tiền chế và hệ thống PCCC chuyên nghiệp tại Việt Nam.',
       },
+      {
+        name: 'keywords',
+        content: 'kết cấu thép, nhà xưởng tiền chế, PCCC, TTB CORP, xây dựng công nghiệp, Thành Công, thép tiền chế',
+      },
+      {
+        name: 'author',
+        content: 'TTB CORP',
+      },
+      {
+        property: 'og:type',
+        content: 'website',
+      },
+      {
+        property: 'og:site_name',
+        content: 'TTB CORP',
+      },
+      {
+        property: 'og:image',
+        content: '/ttb-white.jpg',
+      },
     ],
   }),
   component: RootLayout,

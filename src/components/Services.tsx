@@ -84,6 +84,7 @@ export default function Services() {
                 <img
                   src={`/${item.bgImg}`}
                   alt={item.title}
+                  loading="lazy"
                   className="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-110 opacity-[0.15] group-hover:opacity-[0.4] grayscale group-hover:grayscale-0"
                 />
                 <div className="absolute inset-0 bg-gradient-to-br from-white via-white/60 to-transparent"></div>

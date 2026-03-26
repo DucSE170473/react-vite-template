@@ -106,6 +106,7 @@ export function Projects() {
                 <img
                   src={item.img}
                   alt={item.name}
+                  loading="lazy"
                   className="h-full w-full object-cover transition-transform duration-[1.5s] group-hover:scale-110"
                 />
                 <div className="absolute top-4 left-4 flex flex-wrap gap-2 pr-4">

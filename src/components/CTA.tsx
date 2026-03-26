@@ -16,6 +16,7 @@ export default function CTA() {
               <img
                 src="/steel-cta-bg.jpg" // Đảm bảo file này ở thư mục public/
                 alt="TTB Corp Industrial Project"
+                loading="lazy"
                 onError={() => setImgError(true)}
                 className="w-full h-full object-cover opacity-30 mix-blend-overlay scale-105 group-hover:scale-110 transition-transform duration-[2000ms] blur-[0.3px] group-hover:blur-0"
               />

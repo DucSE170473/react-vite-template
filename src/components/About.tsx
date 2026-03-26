@@ -15,6 +15,7 @@ export default function About() {
             <img
               src="/img-factory.jpg"
               alt="Nhà máy kết cấu thép TTB"
+              loading="lazy"
               className="w-full h-full object-cover"
             />
           </div>
@@ -24,6 +25,7 @@ export default function About() {
             <img
               src="/img-project-site.jpg"
               alt="Dự án thực tế TTB CORP"
+              loading="lazy"
               className="w-full h-full object-cover"
             />
           </div>

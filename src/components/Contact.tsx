@@ -1,5 +1,5 @@
-import { Mail, Phone, MapPin, Send, Clock } from "lucide-react"
-import { useRef } from "react"
+import { Mail, Phone, MapPin, Send, Clock, AlertCircle } from "lucide-react"
+import { useRef, useState } from "react"
 
 export default function Contact() {
     // 1. Khởi tạo Refs để lấy dữ liệu mà không gây re-render (Chống lag 100%)
@@ -8,9 +8,35 @@ export default function Contact() {
     const emailRef = useRef<HTMLInputElement>(null);
     const messageRef = useRef<HTMLTextAreaElement>(null);
 
+    // 2. State cho validation (để hiển thị lỗi)
+    const [errors, setErrors] = useState<{ phone?: string; email?: string }>({});
+
+    const validate = () => {
+        const newErrors: { phone?: string; email?: string } = {};
+        const phone = phoneRef.current?.value || "";
+        const email = emailRef.current?.value || "";
+
+        // Regex SĐT Việt Nam (10 số, bắt đầu bằng 0)
+        const phoneRegex = /^(0[3|5|7|8|9])([0-9]{8})$/;
+        if (!phoneRegex.test(phone)) {
+            newErrors.phone = "Số điện thoại không hợp lệ (cần 10 số, bắt đầu bằng 03, 05, 07, 08, 09)";
+        }
+
+        // Regex Email cơ bản
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (email && !emailRegex.test(email)) {
+            newErrors.email = "Địa chỉ email không đúng định dạng";
+        }
+
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+    }
+
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault()
         
+        if (!validate()) return;
+
         // Lấy giá trị trực tiếp từ các ô input
         const formData = {
             name: nameRef.current?.value,
@@ -20,11 +46,12 @@ export default function Contact() {
         }
 
         console.log("Dữ liệu gửi đi:", formData)
-        alert("Cảm ơn bạn! Thành Công Group sẽ liên hệ lại sớm nhất.")
+        alert("Cảm ơn bạn! TTB CORP sẽ liên hệ lại sớm nhất.")
         
         // Reset form sau khi gửi thành công
         if (e.currentTarget instanceof HTMLFormElement) {
             e.currentTarget.reset();
+            setErrors({});
         }
     }
 
@@ -94,21 +121,32 @@ export default function Contact() {
                                         ref={phoneRef}
                                         type="tel"
                                         placeholder="0792.51.51.51"
-                                        className="w-full px-5 py-4 rounded-2xl bg-slate-50 border border-slate-200 text-black font-semibold focus:bg-white focus:ring-4 focus:ring-[var(--brand-primary)]/10 focus:border-[var(--brand-primary)] outline-none transition-all placeholder:text-slate-400"
+                                        className={`w-full px-5 py-4 rounded-2xl bg-slate-50 border ${errors.phone ? 'border-red-500' : 'border-slate-200'} text-black font-semibold focus:bg-white focus:ring-4 focus:ring-[var(--brand-primary)]/10 focus:border-[var(--brand-primary)] outline-none transition-all placeholder:text-slate-400`}
                                         required
                                     />
+                                    {errors.phone && (
+                                        <div className="flex items-center gap-1.5 text-red-500 text-[10px] font-bold mt-1 ml-1 animate-in fade-in slide-in-from-top-1">
+                                            <AlertCircle size={12} />
+                                            {errors.phone}
+                                        </div>
+                                    )}
                                 </div>
                             </div>
 
                             <div className="space-y-2">
-                                <label className="text-[10px] font-black uppercase text-[var(--brand-primary)] tracking-widest ml-1">Email liên hệ</label>
+                                <label className="text-[10px] font-black uppercase text-[var(--brand-primary)] tracking-widest ml-1">Email (Không bắt buộc)</label>
                                 <input
                                     ref={emailRef}
                                     type="email"
-                                    placeholder="thanhcong@email.com"
-                                    className="w-full px-5 py-4 rounded-2xl bg-slate-50 border border-slate-200 text-black font-semibold focus:bg-white focus:ring-4 focus:ring-[var(--brand-primary)]/10 focus:border-[var(--brand-primary)] outline-none transition-all placeholder:text-slate-400"
-                                    required
+                                    placeholder="contact@ttbcorp.vn"
+                                    className={`w-full px-5 py-4 rounded-2xl bg-slate-50 border ${errors.email ? 'border-red-500' : 'border-slate-200'} text-black font-semibold focus:bg-white focus:ring-4 focus:ring-[var(--brand-primary)]/10 focus:border-[var(--brand-primary)] outline-none transition-all placeholder:text-slate-400`}
                                 />
+                                {errors.email && (
+                                    <div className="flex items-center gap-1.5 text-red-500 text-[10px] font-bold mt-1 ml-1 animate-in fade-in slide-in-from-top-1">
+                                        <AlertCircle size={12} />
+                                        {errors.email}
+                                    </div>
+                                )}
                             </div>
 
                             <div className="space-y-2">

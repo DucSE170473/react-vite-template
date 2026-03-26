@@ -2,9 +2,20 @@ import { createFileRoute } from '@tanstack/react-router'
 import { Projects } from '../components/Projects'
 import PageHeader from '../components/PageHeader'
 
-export const Route = createFileRoute('/projects')({
+export const Route = createFileRoute("/projects")({
+  head: () => ({
+    meta: [
+      {
+        title: "Dự Án Tiêu Biểu - TTB CORP | Công Trình Chất Lượng Cao",
+      },
+      {
+        name: "description",
+        content: "Khám phá danh mục các dự án kết cấu thép và nhà xưởng tiêu biểu đã thực hiện bởi TTB CORP. Khẳng định chất lượng qua từng công trình thực tế.",
+      },
+    ],
+  }),
   component: ProjectsPage,
-})
+});
 
 function ProjectsPage() {
   return (

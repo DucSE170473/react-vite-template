@@ -22,7 +22,7 @@ const projectData = [
     name: 'Showroom Ô Tô & Trưng Bày Hệ Thép',
     type: 'Showroom & Dân dụng',
     location: 'Quận 7, TP. HCM',
-    img: '/img-showroom.jpg',
+    img: '/showroom.jpg',
     size: '3.000m2'
   },
   {

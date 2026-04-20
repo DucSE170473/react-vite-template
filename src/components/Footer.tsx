@@ -16,8 +16,8 @@ export default function Footer() {
                 <img src="/ttb-white.jpg" alt="TTB CORP Logo" className="h-full w-auto object-contain transition-opacity hover:opacity-80" />
               </div>
               <div className="flex flex-col leading-tight border-l-4 border-blue-600 pl-4">
-                <span className="text-blue-500 text-[10px] md:text-xs font-black tracking-[0.2em] uppercase mt-1">TTB CORP</span>
-                <p className="text-[9px] md:text-[10px] text-slate-500 font-bold uppercase mt-2 tracking-wider">Công ty Cổ Phần Thành Công</p>
+                <span className="text-blue-500 text-[10px] md:text-xs font-black tracking-[0.2em] uppercase mt-1">Công ty Cổ Phần Thành Công</span>
+                <p className="text-[9px] md:text-[10px] text-slate-500 font-bold uppercase mt-2 tracking-wider">TTB CORP</p>
               </div>
             </div>
             <p className="text-sm leading-relaxed text-slate-400 font-medium max-w-xs">

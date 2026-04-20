@@ -38,8 +38,8 @@ export default function Header() {
             <img src="/ttb-white.jpg" alt="TTB CORP Logo" className="h-full w-auto object-contain transition-transform group-hover:scale-105" />
           </div>
           <div className="flex flex-col leading-tight border-l-2 border-white/20 pl-2 md:pl-3">
-            <span className="text-white text-[10px] md:text-xs font-black tracking-[0.2em] uppercase mt-1">TTB CORP</span>
-            <p className="text-[9px] md:text-[10px] text-white/70 font-bold uppercase mt-2 tracking-wider text-nowrap">Công ty Cổ Phần Thành Công</p>
+            <span className="text-white text-[10px] md:text-xs font-black tracking-[0.2em] uppercase mt-1">Công ty Cổ Phần Thành Công</span>
+            <p className="text-[9px] md:text-[10px] text-white/70 font-bold uppercase mt-2 tracking-wider text-nowrap">TTB CORP</p>
           </div>
         </Link>
 

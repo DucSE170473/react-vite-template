@@ -59,7 +59,7 @@ export default function Footer() {
             <ul className="space-y-4 text-sm">
               <li className="flex items-start gap-4">
                 <MapPin size={18} className="text-blue-500 shrink-0 mt-1" />
-                <span className="leading-snug">166/12 Huỳnh Văn Nghệ, P. Tân Sơn, Q. Tân Bình, TP. HCM</span>
+                <span className="leading-snug">166/12 Huỳnh Văn Nghệ, P. Tân Sơn, TP. HCM</span>
               </li>
               
               {/* Hotline Lãnh Đạo */}

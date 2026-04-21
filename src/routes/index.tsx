@@ -5,6 +5,7 @@ import Services from '../components/Services'
 import { Projects } from '../components/Projects'
 import CTA from '../components/CTA'
 import { CheckCircle2, Star } from "lucide-react"
+import ProductPage from '../components/ProductPage' 
 
 export const Route = createFileRoute('/')({
   head: () => ({

@@ -18,6 +18,7 @@ export default function Header() {
   const navLinks = [
     { to: "/", label: "Trang chủ", exact: true },
     { to: "/about", label: "Giới thiệu", exact: false },
+    { to: "/products", label: "Sản phẩm", exact: false },
     { to: "/projects", label: "Dự án", exact: false },
     { to: "/contact", label: "Liên hệ", exact: false },
   ]

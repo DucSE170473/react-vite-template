@@ -3,8 +3,10 @@ import axios from "axios"
 import { createClient } from "@sanity/client"
 import { 
   Package, Plus, Settings2, Ruler, 
-  ShieldCheck, Trash2, X, AlertCircle 
+  ShieldCheck, Trash2, X, AlertCircle, LogOut 
 } from "lucide-react"
+import { signInWithPopup, signOut, onAuthStateChanged, type User } from "firebase/auth"
+import { auth, googleProvider } from "../lib/firebase"
 
 // 1. Cấu hình Sanity Client
 const sanity = createClient({
@@ -33,6 +35,7 @@ export default function ProductPage() {
   const [loading, setLoading] = useState(false)
   const [showAdmin, setShowAdmin] = useState(false) 
   const [file, setFile] = useState<File | null>(null)
+  const [user, setUser] = useState<User | null>(null)
   const [form, setForm] = useState<Product>({
     name: "",
     category: "Sản phẩm thép không gỉ",
@@ -55,6 +58,35 @@ export default function ProductPage() {
   }
 
   useEffect(() => { fetchProducts() }, [])
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser)
+      if (currentUser?.email !== 'thanhcongttco@gmail.com') {
+        setShowAdmin(false)
+      }
+    })
+    return () => unsubscribe()
+  }, [])
+
+  const handleLogin = async () => {
+    try {
+      const result = await signInWithPopup(auth, googleProvider);
+      if (result.user.email !== 'thanhcongttco@gmail.com') {
+        alert('Bạn không có quyền quản trị viên!');
+        await signOut(auth);
+      } else {
+        setShowAdmin(true);
+      }
+    } catch (error) {
+      console.error("Lỗi đăng nhập:", error);
+    }
+  }
+
+  const handleLogout = async () => {
+    await signOut(auth);
+    setShowAdmin(false);
+  }
 
   // Upload ảnh lên Cloudinary
   const uploadImage = async () => {
@@ -113,15 +145,34 @@ export default function ProductPage() {
 
       <div className="max-w-7xl mx-auto px-4 md:px-6 -mt-10">
         {/* Nút bật Admin */}
-        <div className="flex justify-end mb-8">
-          <button 
-            onClick={() => setShowAdmin(!showAdmin)}
-            className={`px-6 py-2 rounded-full shadow-lg text-xs font-black uppercase tracking-widest flex items-center gap-2 transition-all ${
-              showAdmin ? 'bg-red-500 text-white' : 'bg-white text-slate-900 hover:bg-slate-900 hover:text-white'
-            }`}
-          >
-            {showAdmin ? <><X size={14}/> Đóng bảng quản lý</> : <><Settings2 size={14}/> Quản lý sản phẩm</>}
-          </button>
+        <div className="flex justify-end mb-8 gap-4">
+          {!user ? (
+            <button 
+              onClick={handleLogin}
+              className="px-6 py-2 rounded-full shadow-lg text-xs font-black uppercase tracking-widest flex items-center gap-2 transition-all bg-white text-slate-900 hover:bg-slate-900 hover:text-white border border-slate-200"
+            >
+              <Settings2 size={14}/> Đăng nhập quản lý
+            </button>
+          ) : (
+            <>
+              {user.email === 'thanhcongttco@gmail.com' && (
+                <button 
+                  onClick={() => setShowAdmin(!showAdmin)}
+                  className={`px-6 py-2 rounded-full shadow-lg text-xs font-black uppercase tracking-widest flex items-center gap-2 transition-all ${
+                    showAdmin ? 'bg-red-500 text-white' : 'bg-white text-slate-900 hover:bg-slate-900 hover:text-white border border-slate-200'
+                  }`}
+                >
+                  {showAdmin ? <><X size={14}/> Đóng bảng quản lý</> : <><Settings2 size={14}/> Quản lý sản phẩm</>}
+                </button>
+              )}
+              <button 
+                onClick={handleLogout}
+                className="px-6 py-2 rounded-full shadow-lg text-xs font-black uppercase tracking-widest flex items-center gap-2 transition-all bg-slate-200 text-slate-700 hover:bg-slate-300"
+              >
+                <LogOut size={14}/> Đăng xuất
+              </button>
+            </>
+          )}
         </div>
 
         {/* FORM ADMIN */}

@@ -99,6 +99,21 @@ export default function ProductPage() {
       }
     } catch (error) {
       console.error("Lỗi đăng nhập:", error);
+      const code = typeof error === "object" && error && "code" in error ? String(error.code) : ""
+
+      if (code === "auth/unauthorized-domain") {
+        alert("Domain hiện tại chưa được thêm vào Firebase Authorized domains. Vui lòng thêm ttb-corp.vercel.app trong Firebase Authentication.")
+        return
+      }
+
+      if (code === "auth/popup-blocked") {
+        alert("Trình duyệt đang chặn cửa sổ đăng nhập Google. Vui lòng cho phép popup cho website này rồi thử lại.")
+        return
+      }
+
+      if (code !== "auth/popup-closed-by-user") {
+        alert("Không thể mở đăng nhập Google. Vui lòng kiểm tra Firebase Authorized domains và thử lại.")
+      }
     }
   }
 

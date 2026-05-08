@@ -20,10 +20,15 @@ const sanity = createClient({
 
 type Product = {
   _id?: string
-  name: string
-  category: string
-  image_url: string
-  specifications: string[]
+  name?: string
+  title?: string
+  category?: string
+  productImage?: string
+  image_url?: string
+  imageUrl?: string
+  specifications?: string[]
+  power?: string
+  price?: number
   thickness?: string
   width?: string
   standard?: string
@@ -39,7 +44,6 @@ export default function ProductPage() {
   const [form, setForm] = useState<Product>({
     name: "",
     category: "Sản phẩm thép không gỉ",
-    image_url: "",
     specifications: [],
     thickness: "",
     width: "",
@@ -50,7 +54,22 @@ export default function ProductPage() {
   // Lấy danh sách sản phẩm
   const fetchProducts = async () => {
     try {
-      const data = await sanity.fetch(`*[_type == "product"] | order(_createdAt desc)`)
+      const data = await sanity.fetch(`*[_type == "product"] | order(_createdAt desc) {
+        _id,
+        "name": coalesce(name, title),
+        title,
+        "category": coalesce(category, power),
+        "productImage": coalesce(productImage, image_url, imageUrl),
+        imageUrl,
+        image_url,
+        "specifications": coalesce(specifications, select(defined(power) => [power], [])),
+        power,
+        price,
+        thickness,
+        width,
+        standard,
+        description
+      }`)
       setProducts(data)
     } catch (err) {
       console.error("Lỗi khi tải dữ liệu:", err)
@@ -107,7 +126,7 @@ export default function ProductPage() {
     setLoading(true)
     try {
       const imageUrl = await uploadImage()
-      await sanity.create({ _type: "product", ...form, image_url: imageUrl })
+      await sanity.create({ _type: "product", ...form, imageUrl })
       alert("Đã thêm sản phẩm thành công!")
       setForm({ ...form, name: "", specifications: [], description: "" })
       setFile(null)
@@ -234,14 +253,20 @@ export default function ProductPage() {
               )}
 
               <div className="h-64 overflow-hidden relative">
-                <img src={p.image_url} alt={p.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                {p.productImage ? (
+                  <img src={p.productImage} alt={p.name || p.title || "Product image"} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                ) : (
+                  <div className="w-full h-full bg-slate-100 flex items-center justify-center text-slate-300">
+                    <Package size={44} />
+                  </div>
+                )}
                 <div className="absolute top-4 left-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-tighter text-blue-600 shadow-sm italic">
-                  {p.category}
+                  {p.category || p.power || "Product"}
                 </div>
               </div>
 
               <div className="p-8 space-y-5 flex-grow">
-                <h3 className="text-2xl font-black text-[var(--brand-primary)] uppercase leading-tight group-hover:text-blue-600 transition-colors">{p.name}</h3>
+                <h3 className="text-2xl font-black text-[var(--brand-primary)] uppercase leading-tight group-hover:text-blue-600 transition-colors">{p.name || p.title}</h3>
                 
                 <div className="grid grid-cols-2 gap-4">
                     <div className="flex items-center gap-2 text-slate-500">

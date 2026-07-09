@@ -168,7 +168,7 @@ export default function ProductPage() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 pb-20">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 pb-20 transition-colors duration-500">
       {/* Banner Tiêu đề */}
       <div className="bg-[var(--brand-primary)] py-16 md:py-24 text-white">
         <div className="max-w-7xl mx-auto px-6 text-center">
@@ -183,7 +183,7 @@ export default function ProductPage() {
           {!user ? (
             <button 
               onClick={handleLogin}
-              className="px-6 py-2 rounded-full shadow-lg text-xs font-black uppercase tracking-widest flex items-center gap-2 transition-all bg-white text-slate-900 hover:bg-slate-900 hover:text-white border border-slate-200"
+              className="px-6 py-2 rounded-full shadow-lg text-xs font-black uppercase tracking-widest flex items-center gap-2 transition-all bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 hover:bg-slate-900 dark:hover:bg-slate-100 hover:text-white dark:hover:text-slate-900 border border-slate-200 dark:border-slate-700 cursor-pointer"
             >
               <Settings2 size={14}/> Đăng nhập quản lý
             </button>
@@ -192,8 +192,8 @@ export default function ProductPage() {
               {user.email === 'thanhcongttco@gmail.com' && (
                 <button 
                   onClick={() => setShowAdmin(!showAdmin)}
-                  className={`px-6 py-2 rounded-full shadow-lg text-xs font-black uppercase tracking-widest flex items-center gap-2 transition-all ${
-                    showAdmin ? 'bg-red-500 text-white' : 'bg-white text-slate-900 hover:bg-slate-900 hover:text-white border border-slate-200'
+                  className={`px-6 py-2 rounded-full shadow-lg text-xs font-black uppercase tracking-widest flex items-center gap-2 transition-all cursor-pointer ${
+                    showAdmin ? 'bg-red-500 text-white border-none' : 'bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 hover:bg-slate-900 dark:hover:bg-slate-100 hover:text-white dark:hover:text-slate-900 border border-slate-200 dark:border-slate-700'
                   }`}
                 >
                   {showAdmin ? <><X size={14}/> Đóng bảng quản lý</> : <><Settings2 size={14}/> Quản lý sản phẩm</>}
@@ -201,7 +201,7 @@ export default function ProductPage() {
               )}
               <button 
                 onClick={handleLogout}
-                className="px-6 py-2 rounded-full shadow-lg text-xs font-black uppercase tracking-widest flex items-center gap-2 transition-all bg-slate-200 text-slate-700 hover:bg-slate-300"
+                className="px-6 py-2 rounded-full shadow-lg text-xs font-black uppercase tracking-widest flex items-center gap-2 transition-all bg-slate-200 dark:bg-slate-850 text-slate-700 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-750 border border-transparent dark:border-slate-700 cursor-pointer"
               >
                 <LogOut size={14}/> Đăng xuất
               </button>
@@ -211,19 +211,19 @@ export default function ProductPage() {
 
         {/* FORM ADMIN */}
         {showAdmin && (
-          <div className="bg-white p-8 rounded-[2rem] shadow-2xl border border-blue-100 mb-12 animate-in fade-in slide-in-from-top-4">
-            <h2 className="text-xl font-black text-[var(--brand-primary)] uppercase mb-6 flex items-center gap-2">
+          <div className="bg-white dark:bg-slate-800 p-8 rounded-[2rem] shadow-2xl border border-slate-100 dark:border-slate-700 mb-12 animate-in fade-in slide-in-from-top-4 text-left">
+            <h2 className="text-xl font-black text-[var(--brand-primary)] dark:text-blue-400 uppercase mb-6 flex items-center gap-2">
                 <Package className="text-[var(--brand-accent)]" /> Đăng ký thông số thép mới
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
               <div className="space-y-1">
-                <label className="text-[10px] font-black uppercase text-slate-400 ml-2">Tên sản phẩm</label>
-                <input className="w-full px-4 py-3 rounded-xl bg-slate-50 border-none text-sm font-bold focus:ring-2 ring-blue-500" 
+                <label className="text-[10px] font-black uppercase text-slate-400 dark:text-slate-500 ml-2">Tên sản phẩm</label>
+                <input className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-700 text-sm font-bold focus:ring-2 ring-blue-500 text-slate-800 dark:text-slate-100 focus:outline-none" 
                        placeholder="VD: Thép tấm mạ kẽm" onChange={e => setForm({...form, name: e.target.value})}/>
               </div>
               <div className="space-y-1">
-                <label className="text-[10px] font-black uppercase text-slate-400 ml-2">Phân loại</label>
-                <select className="w-full px-4 py-3 rounded-xl bg-slate-50 border-none text-sm font-bold focus:ring-2 ring-blue-500"
+                <label className="text-[10px] font-black uppercase text-slate-400 dark:text-slate-500 ml-2">Phân loại</label>
+                <select className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-700 text-sm font-bold focus:ring-2 ring-blue-500 text-slate-800 dark:text-slate-100 focus:outline-none"
                         onChange={e => setForm({...form, category: e.target.value})}>
                   <option>Sản phẩm thép không gỉ</option>
                   <option>Sản phẩm thép carbon</option>
@@ -231,21 +231,24 @@ export default function ProductPage() {
                 </select>
               </div>
               <div className="space-y-1">
-                <label className="text-[10px] font-black uppercase text-slate-400 ml-2">Mác thép (cách nhau dấu phẩy)</label>
-                <input className="w-full px-4 py-3 rounded-xl bg-slate-50 border-none text-sm font-bold focus:ring-2 ring-blue-500" 
+                <label className="text-[10px] font-black uppercase text-slate-400 dark:text-slate-500 ml-2">Mác thép (cách nhau dấu phẩy)</label>
+                <input className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-700 text-sm font-bold focus:ring-2 ring-blue-500 text-slate-800 dark:text-slate-100 focus:outline-none" 
                        placeholder="304, 316, 201..." onChange={e => setForm({...form, specifications: e.target.value.split(",")})}/>
               </div>
-              <div className="space-y-1"><label className="text-[10px] font-black uppercase text-slate-400 ml-2">Độ dày</label>
-                <input className="w-full px-4 py-3 rounded-xl bg-slate-50 border-none text-sm font-bold" placeholder="0.5mm - 20mm" onChange={e => setForm({...form, thickness: e.target.value})}/>
+              <div className="space-y-1">
+                <label className="text-[10px] font-black uppercase text-slate-400 dark:text-slate-500 ml-2">Độ dày</label>
+                <input className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-700 text-sm font-bold text-slate-800 dark:text-slate-100 focus:outline-none" placeholder="0.5mm - 20mm" onChange={e => setForm({...form, thickness: e.target.value})}/>
               </div>
-              <div className="space-y-1"><label className="text-[10px] font-black uppercase text-slate-400 ml-2">Khổ rộng</label>
-                <input className="w-full px-4 py-3 rounded-xl bg-slate-50 border-none text-sm font-bold" placeholder="1000mm, 1500mm" onChange={e => setForm({...form, width: e.target.value})}/>
+              <div className="space-y-1">
+                <label className="text-[10px] font-black uppercase text-slate-400 dark:text-slate-500 ml-2">Khổ rộng</label>
+                <input className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-700 text-sm font-bold text-slate-800 dark:text-slate-100 focus:outline-none" placeholder="1000mm, 1500mm" onChange={e => setForm({...form, width: e.target.value})}/>
               </div>
-              <div className="space-y-1"><label className="text-[10px] font-black uppercase text-slate-400 ml-2">Hình ảnh</label>
-                <input type="file" className="text-xs file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-[10px] file:font-black file:bg-blue-50 file:text-blue-700" onChange={e => setFile(e.target.files?.[0] || null)}/>
+              <div className="space-y-1">
+                <label className="text-[10px] font-black uppercase text-slate-400 dark:text-slate-500 ml-2">Hình ảnh</label>
+                <input type="file" className="text-xs file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-[10px] file:font-black file:bg-blue-50 dark:file:bg-slate-900 file:text-blue-700 dark:file:text-blue-400" onChange={e => setFile(e.target.files?.[0] || null)}/>
               </div>
             </div>
-            <button disabled={loading} onClick={handleSubmit} className="mt-8 w-full md:w-auto bg-[var(--brand-primary)] text-[var(--brand-accent)] px-12 py-4 rounded-xl font-black uppercase tracking-widest hover:bg-slate-900 transition-all shadow-lg disabled:opacity-50">
+            <button disabled={loading} onClick={handleSubmit} className="mt-8 w-full md:w-auto bg-[var(--brand-primary)] text-[var(--brand-accent)] px-12 py-4 rounded-xl font-black uppercase tracking-widest hover:bg-slate-900 dark:hover:bg-white dark:hover:text-[var(--brand-primary)] transition-all shadow-lg disabled:opacity-50 cursor-pointer">
                {loading ? "Đang xử lý dữ liệu..." : "Xác nhận đăng tải"}
             </button>
           </div>
@@ -254,54 +257,54 @@ export default function ProductPage() {
         {/* DANH SÁCH SẢN PHẨM */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {products.map((p) => (
-            <div key={p._id} className="group bg-white rounded-[2rem] border border-slate-100 shadow-xl overflow-hidden hover:-translate-y-2 transition-all duration-500 flex flex-col relative">
+            <div key={p._id} className="group bg-white dark:bg-slate-800 rounded-[2rem] border border-slate-100 dark:border-slate-700 shadow-xl overflow-hidden hover:-translate-y-2 transition-all duration-500 flex flex-col relative">
               
               {/* NÚT XÓA - Chỉ hiện khi đang ở chế độ quản lý */}
               {showAdmin && (
                 <button 
                   onClick={() => p._id && handleDelete(p._id)}
-                  className="absolute top-4 right-4 z-20 bg-white/90 backdrop-blur text-red-500 p-2 rounded-full hover:bg-red-600 hover:text-white transition-all shadow-lg border border-red-100"
+                  className="absolute top-4 right-4 z-20 bg-white/90 dark:bg-slate-800/90 backdrop-blur text-red-500 p-2 rounded-full hover:bg-red-600 hover:text-white transition-all shadow-lg border border-red-100 dark:border-red-950/30 cursor-pointer"
                   title="Xóa sản phẩm"
                 >
                   <Trash2 size={18} />
                 </button>
               )}
 
-              <div className="h-64 overflow-hidden relative">
+              <div className="h-64 overflow-hidden relative bg-slate-100 dark:bg-slate-900">
                 {p.productImage ? (
                   <img src={p.productImage} alt={p.name || p.title || "Product image"} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                 ) : (
-                  <div className="w-full h-full bg-slate-100 flex items-center justify-center text-slate-300">
+                  <div className="w-full h-full flex items-center justify-center text-slate-300 dark:text-slate-600">
                     <Package size={44} />
                   </div>
                 )}
-                <div className="absolute top-4 left-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-tighter text-blue-600 shadow-sm italic">
+                <div className="absolute top-4 left-4 bg-white/90 dark:bg-slate-900/90 backdrop-blur px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-tighter text-blue-600 dark:text-blue-400 shadow-sm italic">
                   {p.category || p.power || "Product"}
                 </div>
               </div>
 
-              <div className="p-8 space-y-5 flex-grow">
-                <h3 className="text-2xl font-black text-[var(--brand-primary)] uppercase leading-tight group-hover:text-blue-600 transition-colors">{p.name || p.title}</h3>
+              <div className="p-8 space-y-5 flex-grow text-left">
+                <h3 className="text-2xl font-black text-[var(--brand-primary)] dark:text-white uppercase leading-tight group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{p.name || p.title}</h3>
                 
                 <div className="grid grid-cols-2 gap-4">
-                    <div className="flex items-center gap-2 text-slate-500">
-                        <Ruler size={16} className="text-blue-400" />
+                    <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400">
+                        <Ruler size={16} className="text-blue-400 shrink-0" />
                         <span className="text-xs font-bold">Dày: {p.thickness || "Liên hệ"}</span>
                     </div>
-                    <div className="flex items-center gap-2 text-slate-500">
-                        <ShieldCheck size={16} className="text-blue-400" />
+                    <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400">
+                        <ShieldCheck size={16} className="text-blue-400 shrink-0" />
                         <span className="text-xs font-bold">Chuẩn: {p.standard || "ASTM"}</span>
                     </div>
                 </div>
 
                 <div className="flex flex-wrap gap-2 pt-2">
                   {p.specifications?.map(spec => (
-                    <span key={spec} className="bg-slate-100 text-slate-600 px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest">{spec}</span>
+                    <span key={spec} className="bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest">{spec}</span>
                   ))}
                 </div>
 
                 <div className="pt-4 mt-auto">
-                    <a href="tel:0792515151" className="flex items-center justify-center w-full py-4 bg-slate-50 border border-slate-100 rounded-2xl text-[var(--brand-primary)] font-black text-[10px] uppercase tracking-widest hover:bg-[var(--brand-accent)] hover:text-white transition-all">
+                    <a href="tel:0792515151" className="flex items-center justify-center w-full py-4 bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-700/60 rounded-2xl text-[var(--brand-primary)] dark:text-blue-400 font-black text-[10px] uppercase tracking-widest hover:bg-[var(--brand-accent)] hover:text-white dark:hover:text-slate-900 transition-all">
                         Liên hệ báo giá ngay
                     </a>
                 </div>
@@ -312,9 +315,9 @@ export default function ProductPage() {
 
         {/* Thông báo nếu chưa có sản phẩm */}
         {products.length === 0 && !loading && (
-          <div className="text-center py-20 bg-white rounded-[2rem] border border-dashed border-slate-300">
-            <AlertCircle className="mx-auto text-slate-300 mb-4" size={48} />
-            <p className="text-slate-400 font-bold uppercase tracking-widest">Chưa có sản phẩm nào được đăng tải</p>
+          <div className="text-center py-20 bg-white dark:bg-slate-800/40 rounded-[2rem] border border-dashed border-slate-300 dark:border-slate-700">
+            <AlertCircle className="mx-auto text-slate-300 dark:text-slate-600 mb-4" size={48} />
+            <p className="text-slate-400 dark:text-slate-500 font-bold uppercase tracking-widest">Chưa có sản phẩm nào được đăng tải</p>
           </div>
         )}
       </div>
